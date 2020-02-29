@@ -17,15 +17,15 @@ class _AddContactState extends State<AddContact> {
   String _pName = '',
       _pdes = '',
       _plasticName = '',
+      _price='',
       _photoUrl = 'empty';
 
   saveContact(BuildContext context) async {
     if (_pName.isNotEmpty &&
         _pdes.isNotEmpty &&
         _pdes.isNotEmpty) {
-      Contact contact = Contact(this._pName, this._pdes, this._plasticName,
+      Contact contact = Contact(this._pName, this._pdes, this._plasticName,this._price,
          this._photoUrl);
-
       await _databaseReference.push().set(contact.toJson());
       navigateToLastScreen(context);
     } else {
@@ -126,6 +126,21 @@ class _AddContactState extends State<AddContact> {
                   },
                   decoration: InputDecoration(
                       labelText: "Product Description",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      )),
+                ),
+              ),
+               Container(
+                margin: EdgeInsets.only(top: 20.0),
+                child: TextField(
+                  onChanged: (value) {
+                    setState(() {
+                      _price = value;
+                    });
+                  },
+                  decoration: InputDecoration(
+                      labelText: "Product price",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       )),

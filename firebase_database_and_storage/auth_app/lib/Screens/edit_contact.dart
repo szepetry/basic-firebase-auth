@@ -20,6 +20,7 @@ class _EditContactState extends State<EditContact> {
   String _pName = '';
   String _plasticName = '';
   String _pdes = '';
+  String _price='';
   String _photoUrl;
 
   //Handle text editing controller
@@ -56,6 +57,7 @@ class _EditContactState extends State<EditContact> {
         _pName =contact.pName;
         _plasticName =contact.plasticName;
         _pdes =contact.pdes;
+        _price=contact.price;
         _photoUrl =contact.photoUrl;
 
         isLoading = false;
@@ -66,7 +68,7 @@ class _EditContactState extends State<EditContact> {
   //update contact
   updateContact(BuildContext context) async{
     if(_pName.isNotEmpty && _plasticName.isNotEmpty && _pdes.isNotEmpty){
-      Contact contact = Contact.withId(this._pName, this._plasticName, this._pdes, this._photoUrl);
+      Contact contact = Contact.withId(this._pName, this._plasticName, this._pdes,this._price, this._photoUrl);
 
       await _databaseReference.child(id).set(contact.toJson());
       navigateToLastScreen(context);
@@ -198,6 +200,22 @@ class _EditContactState extends State<EditContact> {
                         controller: _addController,
                         decoration: InputDecoration(
                           labelText: 'Product Description',
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0)),
+                        ),
+                      ),
+                    ),
+                        Container(
+                      margin: EdgeInsets.only(top: 20.0),
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            _price = value;
+                          });
+                        },
+                        controller: _fnController,
+                        decoration: InputDecoration(
+                          labelText: 'Product Price',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0)),
                         ),
