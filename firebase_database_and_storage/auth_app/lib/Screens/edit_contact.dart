@@ -17,11 +17,9 @@ class _EditContactState extends State<EditContact> {
   String id;
   _EditContactState(this.id);
 
-  String _fName = '';
-  String _lName = '';
-  String _phone = '';
-  String _email = '';
-  String _address = '';
+  String _pName = '';
+  String _plasticName = '';
+  String _pdes = '';
   String _photoUrl;
 
   //Handle text editing controller
@@ -48,18 +46,16 @@ class _EditContactState extends State<EditContact> {
     _databaseReference.child(id).onValue.listen((event) {
       contact = Contact.fromSnapshot(event.snapshot);
 
-      _fnController.text = contact.fName;
-      _lnController.text = contact.fName;
-      _poController.text = contact.fName;
-      _emController.text = contact.fName;
-      _addController.text = contact.fName;
+      _fnController.text = contact.pName;
+      _lnController.text = contact.pName;
+      _poController.text = contact.pName;
+      _emController.text = contact.pName;
+      _addController.text = contact.pName;
 
       setState(() {
-        _fName =contact.fName;
-        _lName =contact.lName;
-        _phone =contact.phone;
-        _email =contact.email;
-        _address =contact.address;
+        _pName =contact.pName;
+        _plasticName =contact.plasticName;
+        _pdes =contact.pdes;
         _photoUrl =contact.photoUrl;
 
         isLoading = false;
@@ -69,8 +65,8 @@ class _EditContactState extends State<EditContact> {
 
   //update contact
   updateContact(BuildContext context) async{
-    if(_fName.isNotEmpty && _lName.isNotEmpty && _phone.isNotEmpty && _email.isNotEmpty && _address.isNotEmpty){
-      Contact contact = Contact.withId(this.id,this._fName, this._lName, this._phone, this._email, this._address, this._photoUrl);
+    if(_pName.isNotEmpty && _plasticName.isNotEmpty && _pdes.isNotEmpty){
+      Contact contact = Contact.withId(this._pName, this._plasticName, this._pdes, this._photoUrl);
 
       await _databaseReference.child(id).set(contact.toJson());
       navigateToLastScreen(context);
@@ -122,7 +118,7 @@ class _EditContactState extends State<EditContact> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Contact"),
+        title: Text("Edit Product Details"),
       ),
       body: Container(
         child: isLoading
@@ -149,7 +145,7 @@ class _EditContactState extends State<EditContact> {
                                     image: new DecorationImage(
                                       fit: BoxFit.cover,
                                       image: _photoUrl == "empty"
-                                          ? AssetImage("assets/logo.png")
+                                          ? AssetImage("assets/cat.jpg")
                                           : NetworkImage(_photoUrl),
                                     ))),
                           ),
@@ -160,12 +156,12 @@ class _EditContactState extends State<EditContact> {
                       child: TextField(
                         onChanged: (value) {
                           setState(() {
-                            _fName = value;
+                            _pName = value;
                           });
                         },
                         controller: _fnController,
                         decoration: InputDecoration(
-                          labelText: 'First Name',
+                          labelText: 'Product Name',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0)),
                         ),
@@ -177,65 +173,31 @@ class _EditContactState extends State<EditContact> {
                       child: TextField(
                         onChanged: (value) {
                           setState(() {
-                            _lName = value;
+                            _plasticName = value;
                           });
                         },
                         controller: _lnController,
                         decoration: InputDecoration(
-                          labelText: 'Last Name',
+                          labelText: 'Plastic Name',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0)),
                         ),
                       ),
                     ),
                     //
-                    Container(
-                      margin: EdgeInsets.only(top: 20.0),
-                      child: TextField(
-                        onChanged: (value) {
-                          setState(() {
-                            _phone = value;
-                          });
-                        },
-                        controller: _poController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'Phone',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0)),
-                        ),
-                      ),
-                    ),
+                
                     //
                     Container(
                       margin: EdgeInsets.only(top: 20.0),
                       child: TextField(
                         onChanged: (value) {
                           setState(() {
-                            _email = value;
-                          });
-                        },
-                        controller: _emController,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5.0)),
-                        ),
-                      ),
-                    ),
-                    //
-                    Container(
-                      margin: EdgeInsets.only(top: 20.0),
-                      child: TextField(
-                        onChanged: (value) {
-                          setState(() {
-                            _address = value;
+                            _pdes = value;
                           });
                         },
                         controller: _addController,
                         decoration: InputDecoration(
-                          labelText: 'Address',
+                          labelText: 'Product Description',
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5.0)),
                         ),

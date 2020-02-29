@@ -29,7 +29,7 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contact app"),
+        title: Text("E-waste Management"),
       ),
       body: Container(
           child: FirebaseAnimatedList(

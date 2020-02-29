@@ -1,74 +1,54 @@
 import 'package:firebase_database/firebase_database.dart';
 
 class Contact {
-  String _id;
-  String _fName;
-  String _lName;
-  String _phone;
-  String _email;
-  String _address;
+ // String _id;
+  String _pName;
+  String _pdes;
+  String _plasticName;
   String _photoUrl;
 
   //Constructer for contact
-  Contact(this._fName, this._lName, this._phone, this._email, this._address,
+  Contact(this._pName, this._pdes,this._plasticName,
       this._photoUrl);
 
   //Constructor for edit
-  Contact.withId(this._id, this._fName, this._lName, this._phone, this._email,
-      this._address, this._photoUrl);
+  Contact.withId(this._pName, this._pdes,this._plasticName,
+      this._photoUrl);
 
   Contact.fromSnapshot(DataSnapshot snapshot){
-    this._id = snapshot.key;
-    this._fName = snapshot.value['fName'];
-    this._lName = snapshot.value['lName'];
-    this._phone = snapshot.value['phone'];
-    this._email = snapshot.value['email'];
-    this._address = snapshot.value['address'];
+    //this._id = snapshot.key;
+    this._pName = snapshot.value['pName'];
+      this._plasticName = snapshot.value['plasticName'];
+    this._pdes = snapshot.value['pdes'];
     this._photoUrl = snapshot.value['photoUrl'];
   }
 
   Map <String, dynamic> toJson(){
     return {
-      "fName":_fName,
-      "lName":_lName,
-      "phone":_phone,
-      "email":_email,
-      "address":_address,
+      "pName":_pName,
+      "pdes":_pdes,
+      "plasticName":_plasticName,
       "photoUrl":_photoUrl,
+      
     };
   }
-
-
   //Getters
-  String get id => this._id;
-  String get fName => this._fName;
-  String get lName => this._lName;
-  String get phone => this._phone;
-  String get email => this._email;
-  String get address => this._address;
+  String get pName => this._pName;
+  String get pdes => this._pdes;
+  String get plasticName => this._plasticName;
   String get photoUrl => this._photoUrl;
+  
 
   //Setters
-  set fName(String fName) {
-    this._fName = fName;
+  set fName(String pName) {
+    this._pName = pName;
   }
-
-  set lName(String lName) {
-    this._lName = lName;
+  set pdes(String pdes) {
+    this._pdes = pdes;
   }
-
-  set phone(String phone) {
-    this._phone = phone;
+   set plasticName(String plasticName) {
+    this._plasticName = plasticName;
   }
-
-  set email(String email) {
-    this._email = email;
-  }
-
-  set address(String address) {
-    this._address = address;
-  }
-
   set photoUrl(String photoUrl) {
     this._photoUrl = photoUrl;
   }

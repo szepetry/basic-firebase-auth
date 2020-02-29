@@ -127,51 +127,15 @@ class _ViewContactState extends State<ViewContact> {
                               width: 10.0,
                             ),
                             Text(
-                              "${_contact.fName} ${_contact.lName}",
+                              "${_contact.pName} ${_contact.plasticName}",
                               style: TextStyle(fontSize: 20.0),
                             ),
                           ],
                         )),
                   ),
                   // phone
-                  Card(
-                    elevation: 2.0,
-                    child: Container(
-                        margin: EdgeInsets.all(20.0),
-                        width: double.maxFinite,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.phone),
-                            Container(
-                              width: 10.0,
-                            ),
-                            Text(
-                              _contact.phone,
-                              style: TextStyle(fontSize: 20.0),
-                            ),
-                          ],
-                        )),
-                  ),
-                  // email
-                  Card(
-                    elevation: 2.0,
-                    child: Container(
-                        margin: EdgeInsets.all(20.0),
-                        width: double.maxFinite,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.email),
-                            Container(
-                              width: 10.0,
-                            ),
-                            Text(
-                              _contact.email,
-                              style: TextStyle(fontSize: 20.0),
-                            ),
-                          ],
-                        )),
-                  ),
-                  // address
+                
+                  // product description
                   Card(
                     elevation: 2.0,
                     child: Container(
@@ -184,40 +148,40 @@ class _ViewContactState extends State<ViewContact> {
                               width: 10.0,
                             ),
                             Text(
-                              _contact.address,
+                              _contact.pdes,
                               style: TextStyle(fontSize: 20.0),
                             ),
                           ],
                         )),
                   ),
                   // call and sms
-                  Card(
-                    elevation: 2.0,
-                    child: Container(
-                        margin: EdgeInsets.all(20.0),
-                        width: double.maxFinite,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            IconButton(
-                              iconSize: 30.0,
-                              icon: Icon(Icons.phone),
-                              color: Colors.red,
-                              onPressed: () {
-                                callAction(_contact.phone);
-                              },
-                            ),
-                            IconButton(
-                              iconSize: 30.0,
-                              icon: Icon(Icons.message),
-                              color: Colors.red,
-                              onPressed: () {
-                                smsAction(_contact.phone);
-                              },
-                            )
-                          ],
-                        )),
-                  ),
+                // //  Card(
+                //     elevation: 2.0,
+                //     child: Container(
+                //         margin: EdgeInsets.all(20.0),
+                //         width: double.maxFinite,
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //           children: <Widget>[
+                //             IconButton(
+                //               iconSize: 30.0,
+                //               icon: Icon(Icons.phone),
+                //               color: Colors.red,
+                //               onPressed: () {
+                //                 callAction(_contact.phone);
+                //               },
+                //             ),
+                //             IconButton(
+                //               iconSize: 30.0,
+                //               icon: Icon(Icons.message),
+                //               color: Colors.red,
+                //               onPressed: () {
+                //                 smsAction(_contact.phone);
+                //               },
+                //             )
+                //           ],
+                //         )),
+                //   ),
                   // edit and delete
                   Card(
                     elevation: 2.0,

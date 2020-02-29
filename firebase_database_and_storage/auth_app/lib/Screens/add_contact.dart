@@ -14,21 +14,17 @@ class AddContact extends StatefulWidget {
 class _AddContactState extends State<AddContact> {
   DatabaseReference _databaseReference = FirebaseDatabase.instance.reference();
 
-  String _fName = '',
-      _lName = '',
-      _phone = '',
-      _email = '',
-      _address = '',
+  String _pName = '',
+      _pdes = '',
+      _plasticName = '',
       _photoUrl = 'empty';
 
   saveContact(BuildContext context) async {
-    if (_fName.isNotEmpty &&
-        _lName.isNotEmpty &&
-        _phone.isNotEmpty &&
-        _email.isNotEmpty &&
-        _address.isNotEmpty) {
-      Contact contact = Contact(this._fName, this._lName, this._phone,
-          this._email, this._address, this._photoUrl);
+    if (_pName.isNotEmpty &&
+        _pdes.isNotEmpty &&
+        _pdes.isNotEmpty) {
+      Contact contact = Contact(this._pName, this._pdes, this._plasticName,
+         this._photoUrl);
 
       await _databaseReference.push().set(contact.toJson());
       navigateToLastScreen(context);
@@ -55,7 +51,7 @@ class _AddContactState extends State<AddContact> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add contact"),
+        title: Text("Add product details"),
       ),
       body: Container(
         child: Padding(
@@ -77,7 +73,7 @@ class _AddContactState extends State<AddContact> {
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: _photoUrl == "empty"
-                              ? AssetImage("assets/logo.png")
+                              ? AssetImage("assets/cat.jpg")
                               : NetworkImage(_photoUrl),
                         ),
                       ),
@@ -90,12 +86,12 @@ class _AddContactState extends State<AddContact> {
                 child: TextField(
                   onChanged: (value) {
                     setState(() {
-                      _fName = value;
+                      _pName = value;
                     });
                   },
                   //First name
                   decoration: InputDecoration(
-                      labelText: "First Name",
+                      labelText: "Product Name",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       )),
@@ -107,59 +103,29 @@ class _AddContactState extends State<AddContact> {
                 child: TextField(
                   onChanged: (value) {
                     setState(() {
-                      _lName = value;
+                      _plasticName = value;
                     });
                   },
                   decoration: InputDecoration(
-                      labelText: "Last Name",
+                      labelText: "Plastic Name",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       )),
                 ),
               ),
               //phone
-              Container(
-                margin: EdgeInsets.only(top: 20.0),
-                child: TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      _phone = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                      labelText: "Phone",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      )),
-                ),
-              ),
-              //email
-              Container(
-                margin: EdgeInsets.only(top: 20.0),
-                child: TextField(
-                  onChanged: (value) {
-                    setState(() {
-                      _email = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                      labelText: "Email",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      )),
-                ),
-              ),
+              
               //Address
               Container(
                 margin: EdgeInsets.only(top: 20.0),
                 child: TextField(
                   onChanged: (value) {
                     setState(() {
-                      _address = value;
+                      _pdes = value;
                     });
                   },
                   decoration: InputDecoration(
-                      labelText: "Address",
+                      labelText: "Product Description",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       )),
@@ -189,6 +155,7 @@ class _AddContactState extends State<AddContact> {
 
   Future pickImage() async {
     File file = await ImagePicker.pickImage(
+      imageQuality: 100,
         source: ImageSource.gallery, maxHeight: 200.0, maxWidth: 200.0);
     String fileName = basename(file.path);
     uploadImage(fileName, file);
